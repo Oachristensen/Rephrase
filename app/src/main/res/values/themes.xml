@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Rephrase" parent="android:Theme.DeviceDefault.Light.DarkActionBar"/>
+    <!-- Primary brand color. -->
+    <color name="colorPrimary">@color/blue_theme_primary</color>
+    <color name="colorPrimaryVariant">@color/blue_theme_primary_alt</color>
+    <color name="colorOnPrimary">@color/black</color>
+    <!-- Secondary brand color. -->
+    <color name="colorSecondary">@color/blue_theme_dark</color>
+    <color name="colorSecondaryVariant">@color/blue_theme_dark</color>
+    <color name="colorOnSecondary">@color/black</color>
+    <!-- Customize your theme here. -->
+</resources>
