@@ -1,6 +1,7 @@
 package com.owen.rephrase.handlers
 
 import android.media.MediaPlayer
+import android.os.Environment
 import android.os.Handler
 import com.owen.rephrase.MainActivity
 import com.owen.rephrase.R
@@ -12,6 +13,8 @@ class MediaHandler {
     private val handler : Handler = Handler()
     private lateinit var mainActivity : MainActivity
 
+    private val EXTERNALSTORAGEDIRECTORY = Environment.getExternalStorageDirectory().path
+
 
 
 
@@ -19,10 +22,11 @@ class MediaHandler {
 fun prepareMediaPlayer(i: MainActivity) {
     mainActivity = i
     mediaPlayer = MediaPlayer()
-    val rawResourceId = R.raw.hazard_duty_pay
-    val rawFileDescriptor = mainActivity.resources.openRawResourceFd(rawResourceId)
-    mediaPlayer.setDataSource(rawFileDescriptor.fileDescriptor, rawFileDescriptor.startOffset, rawFileDescriptor.length)
-    mediaPlayer.prepareAsync()
+//    val rawResourceId = R.raw.hazard_duty_pay
+//    val rawFileDescriptor = mainActivity.resources.openRawResourceFd(rawResourceId)
+//    mediaPlayer.setDataSource(rawFileDescriptor.fileDescriptor, rawFileDescriptor.startOffset, rawFileDescriptor.length)
+//    mediaPlayer.setDataSource("$EXTERNALSTORAGEDIRECTORY/Rephrase Audios/Chris Christodoulou - Risk of Rain 2 - 02 Risk of Rain 2.flac")
+//    mediaPlayer.prepareAsync()
 
 
 
