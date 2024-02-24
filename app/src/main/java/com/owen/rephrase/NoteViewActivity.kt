@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-private const val TAG = "NoteViewActivity"
 private const val CREATE_FILE_REQUEST_CODE = 1
 
 class NoteViewActivity : AppCompatActivity() {
@@ -25,7 +24,6 @@ class NoteViewActivity : AppCompatActivity() {
     }
 
     fun exportText(view: View) {
-
         writeToFile(noteTextView.text.toString())
     }
 
@@ -38,6 +36,7 @@ class NoteViewActivity : AppCompatActivity() {
         startActivityForResult(intent, CREATE_FILE_REQUEST_CODE)
 
     }
+    //Handles selection for export location
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CREATE_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
