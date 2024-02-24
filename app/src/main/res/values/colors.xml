@@ -14,5 +14,6 @@
     <color name="blue_theme_primary_alt">#03186B</color>
     <color name="blue_theme_dark">#020F42</color>
     <color name="blue_theme_very_light">#B89D4F</color>
+    <color name="incomplete_red">#EB0101</color>
 
 </resources>

@@ -3,13 +3,24 @@
             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blue_theme_dark">
+            android:background="@color/blue_theme_dark"
+            android:id="@+id/ScrollView" android:onClick="exportText">
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <Button
+                android:text="EXPORT"
+                android:layout_width="116dp"
+                android:layout_height="65dp" android:id="@+id/button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/white"
+                android:background="@color/blue_theme_light"
+                android:textSize="21dp"
+                android:onClick="exportText">
+        </Button>
+        <EditText
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:id="@+id/noteTextView"
@@ -20,8 +31,7 @@
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintVertical_bias="0.0">
-
-        </androidx.appcompat.widget.AppCompatTextView>
+        </EditText>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

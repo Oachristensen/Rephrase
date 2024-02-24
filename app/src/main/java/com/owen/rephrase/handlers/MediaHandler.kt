@@ -1,10 +1,13 @@
 package com.owen.rephrase.handlers
 
+import android.graphics.Path
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Environment
 import android.os.Handler
 import com.owen.rephrase.MainActivity
 import com.owen.rephrase.R
+import java.net.URI
 
 class MediaHandler {
     lateinit var mediaPlayer: MediaPlayer
@@ -12,9 +15,7 @@ class MediaHandler {
     private var curMediaTimeMillis: Int = 0
     private val handler : Handler = Handler()
     private lateinit var mainActivity : MainActivity
-
-    private val EXTERNALSTORAGEDIRECTORY = Environment.getExternalStorageDirectory().path
-
+    private var mediaDurationMax = ""
 
 
 
@@ -22,14 +23,6 @@ class MediaHandler {
 fun prepareMediaPlayer(i: MainActivity) {
     mainActivity = i
     mediaPlayer = MediaPlayer()
-//    val rawResourceId = R.raw.hazard_duty_pay
-//    val rawFileDescriptor = mainActivity.resources.openRawResourceFd(rawResourceId)
-//    mediaPlayer.setDataSource(rawFileDescriptor.fileDescriptor, rawFileDescriptor.startOffset, rawFileDescriptor.length)
-//    mediaPlayer.setDataSource("$EXTERNALSTORAGEDIRECTORY/Rephrase Audios/Chris Christodoulou - Risk of Rain 2 - 02 Risk of Rain 2.flac")
-//    mediaPlayer.prepareAsync()
-
-
-
     mediaPlayer.setOnPreparedListener {
         mediaDuration = mediaPlayer.duration
         handler.post(updateRunnable)
@@ -42,7 +35,11 @@ fun prepareMediaPlayer(i: MainActivity) {
             val seconds: Int = millis / 1000
             val minutes: Int = seconds / 60
             val remSeconds: Int = (seconds % 60)
-            return ("$minutes:$remSeconds")
+            var result = "$minutes:$remSeconds"
+            if (remSeconds.toString().length == 1) {
+                result = "$minutes:0$remSeconds"
+            }
+            return (result)
         }
     }
 
@@ -50,16 +47,21 @@ fun prepareMediaPlayer(i: MainActivity) {
         if (this::mediaPlayer.isInitialized) {
             mediaPlayer.seekTo((mediaDuration * float).toInt())
         }
+        else{
+            println("MediaPlayerNotInitalized")
+        }
     }
 
 
     fun mediaPlayPause() {
         if (!this::mediaPlayer.isInitialized) {
+            println("MediaPlayerNotInitalized")
         }
         if (mediaPlayer.isPlaying) {
             mediaPlayer.pause()
             return
         }
+
         mediaPlayer.start()
     }
 
@@ -67,11 +69,16 @@ fun prepareMediaPlayer(i: MainActivity) {
     private val updateRunnable = object : Runnable {
         override fun run() {
             curMediaTimeMillis = mediaPlayer.currentPosition
-            val mediaDurationMax = millisecondsToSecondsFormatted(mediaPlayer.duration)
+            mediaDurationMax = millisecondsToSecondsFormatted(mediaPlayer.duration)
             mainActivity.setTimerTextViewText(millisecondsToSecondsFormatted(curMediaTimeMillis) + "/" + mediaDurationMax)
 
             handler.postDelayed(this, 1000)
         }
+    }
+    fun setMediaDataSource(source : Uri) {
+        mediaPlayer.reset()
+        mediaPlayer.setDataSource(mainActivity.baseContext, source)
+        mediaPlayer.prepareAsync()
     }
 
 }
